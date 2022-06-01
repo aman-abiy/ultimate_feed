@@ -5,6 +5,7 @@ import {
     CLEAR_ACCOUNT_ISLOADING,
     UPDATE_ERRORMSG
 } from '../store/action_types'
+import { AUTH_LOGIN_ERROR_MSG } from './consts'
 
 const axiosInterceptors = () => {
     axios.interceptors.response.use((response) => {
@@ -40,6 +41,9 @@ const axiosInterceptors = () => {
         if (error.response.status === 500) {
             store.dispatch(UPDATE_ERRORMSG, { errorMsg: 'ERROR' })
         }
+        store.dispatch(UPDATE_ERRORMSG, { errorMsg: 'ERROR' })
+
+
     });
 }
 

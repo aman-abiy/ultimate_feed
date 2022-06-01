@@ -26,9 +26,9 @@ export const ifAuthDeny = (to, from, next) => {
         // clear isLoading states
     store.dispatch(CLEAR_ACCOUNT_ISLOADING)
 
-    // if (store.getters.sessionToken != null && store.getters.account.data != null) {
-    //     router.push(from.fullPath)
-    //     return
-    // }
+    if (store.getters.sessionToken != null && store.getters.account.data != null) {
+        router.push(from.fullPath)
+        return
+    }
     next();
 }
