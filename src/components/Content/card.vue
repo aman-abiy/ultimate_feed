@@ -25,7 +25,7 @@ import { faThumbsUp, faThumbsDown, faForward } from '@fortawesome/free-solid-svg
 library.add(faThumbsUp, faThumbsDown, faForward)
 
 import { ENGAGEMENT_LIKE, ENGAGEMENT_DISLIKE } from '../../utils/consts'
-import { SEND_ENGAGEMENT, GET_FEED } from '../../store/action_types'
+import { GET_ENGAGEMENT, GET_FEED } from '../../store/action_types'
 
 export default {
     props: {
@@ -55,7 +55,7 @@ export default {
                 time: new Date(Date.now()),
                 // foreign_id: this.account.id
             }
-            this.$store.dispatch(SEND_ENGAGEMENT, engagement)
+            this.$store.dispatch(GET_ENGAGEMENT, engagement)
         },
         getFeeds() {
             const feedObj = {

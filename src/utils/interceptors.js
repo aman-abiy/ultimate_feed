@@ -43,7 +43,6 @@ const axiosInterceptors = () => {
         }
         store.dispatch(UPDATE_ERRORMSG, { errorMsg: 'ERROR' })
 
-
     });
 }
 

@@ -2,7 +2,7 @@ import axios from 'axios'
 import router from '../../router'
 import asyncHandler from '@/utils/async_handler'
 import { SET_ENGAGEMENT } from '../mutation_types'
-import { SEND_ENGAGEMENT, CLEAR_ENGAGEMENT_ISLOADING } from '../action_types'
+import { GET_ENGAGEMENT, CLEAR_ENGAGEMENT_ISLOADING } from '../action_types'
 import { ENGAGEMENT_URL } from '../../utils/urls'
 
 const engagement = {
@@ -19,14 +19,13 @@ const engagement = {
         [SET_ENGAGEMENT]: (state, payload) => { payload.data != null ? state.engagement.data = payload.data : null, state.engagement.status = payload.status, state.engagement.isLoading = payload.isLoading }
     },
     actions: {
-        [SEND_ENGAGEMENT]: asyncHandler(async({ commit }, payload) => {
+        [GET_ENGAGEMENT]: asyncHandler(async({ commit }, payload) => {
             commit(SET_ENGAGEMENT, { data: null, isLoading: true })
-            const result = await axios.post(ENGAGEMENT_URL, {
-
-            })
+            const result = await axios.get(ENGAGEMENT_URL)
+            console.log('result.data', result)
 
             if (result.status == 200) {
-                commit(SET_ENGAGEMENT, { data: result.data.data, isLoading: false })
+                commit(SET_ENGAGEMENT, { data: result.data, isLoading: false })
                 return
             }
             commit(SET_ENGAGEMENT, { data: null, isLoading: false })

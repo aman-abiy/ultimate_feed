@@ -18,7 +18,7 @@
 
 	// Bar chart for "Active Users" card.
 	import ChartLine from '../Charts/ChartLine' ;
-
+	import { GET_ENGAGEMENT } from '../../store/action_types'
 	export default ({
 		components: {
 			ChartLine,
@@ -54,6 +54,24 @@
 					],
 				},
 			}
+		},
+		computed: {
+			engagements() {
+				return this.$store.getters.engagement
+			}
+		},
+		methods: {
+			getEngagement() {
+				this.$store.dispatch(GET_ENGAGEMENT)
+			},
+			setValues() {
+				this.lineChartData.labels = this.engagements.months
+				this.lineChartData.datasets.data = this.engagements.data
+			}
+		},
+		mounted() {
+			this.getEngagement()
+			this.setValues()
 		},
 	})
 

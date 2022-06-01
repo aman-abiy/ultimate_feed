@@ -14,7 +14,7 @@ let routes = [{
         path: '/',
         name: 'Dashboard',
         layout: "dashboard",
-        beforeEnter: ifNotAuthDeny,
+        // beforeEnter: ifNotAuthDeny,
         component: () =>
             import ( /* webpackChunkName: "dashboard" */ '../views/Dashboard.vue'),
     },

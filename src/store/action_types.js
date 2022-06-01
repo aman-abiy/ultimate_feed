@@ -16,4 +16,5 @@ export const GET_FEED = 'getFeeds'
 export const CLEAR_FEED_ISLOADING = 'clearFeedIsLoading'
 
 // engagement
-export const SEND_ENGAGEMENT = 'sendEngagement'
+export const GET_ENGAGEMENT = 'sendEngagement'
+export const CLEAR_ENGAGEMENT_ISLOADING = 'clearEngagementIsLoading'
