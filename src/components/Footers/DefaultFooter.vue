@@ -15,7 +15,7 @@
 		
 		<!-- Copyright Notice -->
 		<p class="copyright">
-			Copyright © 2021 Ultimate Feed
+			Copyright © {{ year }} Ultimate Feed
 		</p>
 		<!-- / Copyright Notice -->
 
@@ -29,8 +29,18 @@
 	export default ({
 		data() {
 			return {
+				year: null
 			}
 		},
+		methods: {
+			getYear() {
+				const date = new Date(Date.now())
+				this.year = date.getFullYear()
+			}
+		},
+		created() {
+			this.getYear()
+		}
 	})
 
 </script>

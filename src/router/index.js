@@ -13,8 +13,8 @@ let routes = [{
     {
         path: '/',
         name: 'Dashboard',
-        layout: "dashboard",
-        // beforeEnter: ifNotAuthDeny,
+        layout: 'dashboard',
+        beforeEnter: ifNotAuthDeny,
         component: () =>
             import ( /* webpackChunkName: "dashboard" */ '../views/Dashboard.vue'),
     },
@@ -27,6 +27,7 @@ let routes = [{
     {
         path: '/api',
         name: 'API',
+        beforeEnter: ifNotAuthDeny,
         component: () =>
             import ( /* webpackChunkName: "dashboard" */ '../views/API.vue'),
     },
@@ -90,6 +91,13 @@ let routes = [{
         beforeEnter: ifAuthDeny,
         component: () =>
             import ('../views/Sign-Up.vue'),
+    },
+    {
+        path: '/change-password',
+        name: 'Change-Password',
+        beforeEnter: ifAuthDeny,
+        component: () =>
+            import ('../views/Change-Password.vue'),
     },
 ]
 

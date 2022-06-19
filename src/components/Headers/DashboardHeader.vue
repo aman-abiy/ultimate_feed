@@ -12,14 +12,13 @@
 
 					<!-- Header Breadcrumbs -->
 					<a-breadcrumb>
-						<a-breadcrumb-item><router-link to="/"> Pages</router-link></a-breadcrumb-item>
-						<a-breadcrumb-item>{{ this.$route.name }}</a-breadcrumb-item>
+						<a-breadcrumb-item><router-link to="/"> -</router-link></a-breadcrumb-item>
 					</a-breadcrumb>
 					<!-- / Header Breadcrumbs -->
 
 					<!-- Header Page Title -->
 					<div class="ant-page-header-heading">
-						<span class="ant-page-header-heading-title">{{ this.$route.name }}</span>
+						<span class="ant-page-header-heading-title">Ultimate Feed</span>
 					</div>
 					<!-- / Header Page Title -->
 
@@ -30,19 +29,22 @@
 				<a-col :span="24" :md="18" class="header-control">
 
 					<!-- Header Control Buttons -->
-					<router-link :to="{ name: 'Sign-Up' }" class="btn-sign-in" @click="e => e.preventDefault()">
+					<router-link v-if="account == null" :to="{ name: 'Sign-Up' }" class="btn-sign-in" @click="e => e.preventDefault()">
 						<span>Register</span>
 					</router-link>
-					<router-link :to="{ name: 'Sign-In' }" class="btn-sign-in" @click="e => e.preventDefault()">
+					<router-link v-if="account == null" :to="{ name: 'Sign-In' }" class="btn-sign-in" @click="e => e.preventDefault()">
 						<span>Sign In</span>
 					</router-link>
-					<router-link :to="{ name: 'API' }" class="btn-sign-in" @click="e => e.preventDefault()">
+					<router-link v-if="account != null" :to="{ name: 'API' }" class="btn-sign-in" @click="e => e.preventDefault()">
 						<span>API</span>
 					</router-link>
-					<router-link :to="{ name: 'Docs' }" class="btn-sign-in" @click="e => e.preventDefault()">
+					<router-link v-if="account != null" :to="{ name: 'Docs' }" class="btn-sign-in" @click="e => e.preventDefault()">
 						<span>Docs</span>
 					</router-link>
-					<router-link to="/sign-in" class="btn-sign-in" @click="e => e.preventDefault()">
+					<router-link v-if="account != null" :to="{ name: 'Profile' }" class="btn-sign-in" @click="e => e.preventDefault()">
+						<span>Profile</span>
+					</router-link>
+					<router-link v-if="account != null" :to="{ name: 'Dashboard' }" class="btn-sign-in" @click="e => e.preventDefault()">
 						<span>Dashboard</span>
 					</router-link>
 					<!-- / Header Control Buttons -->
@@ -118,6 +120,11 @@
 
 				// The wrapper element to attach dropdowns to.
 				wrapper: document.body,
+			}
+		},
+		computed: {
+			account() {
+				return this.$store.getters.account
 			}
 		},
 		methods: {

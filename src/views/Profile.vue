@@ -15,22 +15,63 @@
 			<template #title>
 				<a-row type="flex" align="middle">
 					<a-col :span="24" :md="12" class="col-info">
-						<a-avatar :size="74" shape="square" src="images/face-1.jpg" />
+						<a-avatar :size="74" shape="square" src="https://media.istockphoto.com/photos/hologram-human-head-deep-learning-and-artificial-intelligence-picture-id1364105164?b=1&k=20&m=1364105164&s=170667a&w=0&h=0Ehy6gPN70RTirKZ3TP3I0zoQz3bEFpzfSWfi0MhYd8=" />
 						<div class="avatar-info">
-							<h4 class="font-semibold m-0">email@example.com</h4>
+							<h4 class="font-semibold m-0">{{ account.firstName }} {{ account.lastName }}</h4>
 							<p>Client Account</p>
 						</div>
 					</a-col>
 					<a-col :span="24" :md="12" style="display: flex; align-items: center; justify-content: flex-end">
 						<a-radio-group v-model="profileHeaderBtns" size="small">
 							<a-radio-button value="overview">OVERVIEW</a-radio-button>
-							<a-radio-button value="teams">TEAMS</a-radio-button>
 							<a-radio-button value="projects">PROJECTS</a-radio-button>
 						</a-radio-group>
 					</a-col>
 				</a-row>
 			</template>
 		</a-card>
+		<br>
+		<br>
+		<br>
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<a-card :bordered="false" class="card-profile-head" :bodyStyle="{padding: 0,}">
+						<template #title>
+							<div class="row">
+								<div class="col-6">
+									<p class="title"><i class="fa fa-user"></i> First Name</p>
+									<hr>
+									<p class="title"><i class="fa fa-user"></i> Last Name</p>
+									<hr>
+
+									<p class="title"><i class="fa fa-envelope"></i> Email</p>
+									<hr>
+
+									<p class="title"><i class="fa fa-phone"></i> Phone</p>
+								</div>
+								<div class="col-6">
+									<p class="">{{ account.firstName }}</p>
+									<hr>
+									<p class="">{{ account.lastName }}</p>
+									<hr>
+
+									<p class=""><a :href="`mailto:`">{{ account.email }}</a></p>
+									<hr>
+
+									<p class=""><a :href="`tel:`">{{ account.phone }}</a></p>
+								</div>
+							</div>
+						</template>
+					</a-card>
+				</div>
+			</div>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
 		<!-- User Profile Card -->
 
 		<!-- <a-row type="flex" :gutter="24"> -->
@@ -224,9 +265,21 @@
 				projects,
 			}
 		},
+		computed: {
+			account() {
+				return this.$store.getters.account.data
+			}
+		},
 	})
 
 </script>
 
 <style lang="scss">
+.fa {
+	margin-right: 10px;
+}
+
+.container .title {
+	color: grey
+}
 </style>

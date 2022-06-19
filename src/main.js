@@ -25,6 +25,9 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ValidationProvider } from 'vee-validate';
 import { ValidationObserver } from 'vee-validate';
 import axiosInterceptors from './utils/interceptors';
+import Clipboard from 'v-clipboard'
+import VueToast from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-default.css';
 
 import { AXIOS_TIMEOUT } from './utils/consts'
 // import './plugins/click-away'
@@ -52,6 +55,9 @@ Vue.component('ValidationObserver', ValidationObserver)
 Vue.component("layout-default", DefaultLayout);
 Vue.component("layout-dashboard", DashboardLayout);
 Vue.component("layout-dashboard-rtl", DashboardRTLLayout);
+
+Vue.use(Clipboard)
+Vue.use(VueToast);
 
 new Vue({
     router,

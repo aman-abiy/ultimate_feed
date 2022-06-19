@@ -6,9 +6,8 @@
 <template>
 	<div>
 		<!-- Counter Widgets -->
-		<a-row :gutter="24">
+		<!-- <a-row :gutter="24">
 			<a-col :span="24" :lg="12" :xl="6" class="mb-24" v-for="(stat, index) in stats" :key="index">
-				<!-- Widget 1 Card -->
 				<WidgetCounter
 					:title="stat.title"
 					:value="stat.value"
@@ -17,9 +16,8 @@
 					:icon="stat.icon"
 					:status="stat.status"
 				></WidgetCounter>
-				<!-- / Widget 1 Card -->
 			</a-col>
-		</a-row>
+		</a-row> -->
 		<!-- / Counter Widgets -->
 
 		<!-- Charts -->
@@ -270,12 +268,13 @@
 				stats,
 			}
 		},
-		// beforeRouteEnter(to, from, next) {
-		// 	if((from.name == 'Sign-In') || (from.name == null)) {
-		// 		router.go()
-		// 	}
-		// 	next()
-		// },
+		beforeRouteEnter(to, from, next) {
+			if((from.name == 'Sign-In') || (from.name == null)) {
+				console.log('from.name', from.name)
+				// router.go()
+			}
+			next()
+		},
 	})
 
 </script>

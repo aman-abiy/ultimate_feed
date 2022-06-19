@@ -16,12 +16,12 @@ const engagement = {
         engagement: state => state.engagement
     },
     mutations: {
-        [SET_ENGAGEMENT]: (state, payload) => { payload.data != null ? state.engagement.data = payload.data : null, state.engagement.status = payload.status, state.engagement.isLoading = payload.isLoading }
+        [SET_ENGAGEMENT]: (state, payload) => { payload.data != null ? state.engagement.data = payload.data : null, state.engagement.isLoading = payload.isLoading }
     },
     actions: {
         [GET_ENGAGEMENT]: asyncHandler(async({ commit }, payload) => {
             commit(SET_ENGAGEMENT, { data: null, isLoading: true })
-            const result = await axios.get(ENGAGEMENT_URL)
+                // const result = await axios.get(ENGAGEMENT_URL)
             console.log('result.data', result)
 
             if (result.status == 200) {

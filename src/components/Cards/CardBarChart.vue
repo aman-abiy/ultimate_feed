@@ -2,32 +2,30 @@
 
 	<!-- Active Users Card -->
 	<a-card :bordered="false" class="dashboard-bar-chart">
-		<chart-bar :height="220" :data="barChartData"></chart-bar>
+		<div class="row date-filter">
+			<div class="col-5">
+				<label for="startDate">Start Date: </label>
+				<input v-model="startDate" class="datePicker" type="date" name="startDate" id="startDate">
+			</div>
+			<div class="col-5">
+				<label for="endDate">End Date: </label>
+				<input v-model="endDate" class="datePicker" type="date" name="endDate" id="endDate">
+			</div>
+			<div class="col-2">
+				<button v-on:click="filter" class="btn filter-btn"><strong>Filter</strong></button>
+			</div>
+		</div>
+		<hr>
 		<div class="card-title">
-			<h6>Active Users</h6>
+			<h6>Impression</h6>
 			<p>than last week <span class="text-success">+23%</span></p>
 		</div>
-		<div class="card-content">
-			<p>We have created multiple options for you to put together and customise into pixel perfect pages.</p>
+		<chart-bar :height="220" :data="barChartData"></chart-bar>
+		<div class="card-title">
+			<h6>Activities</h6>
+			<p>than last week <span class="text-success">+23%</span></p>
 		</div>
-		<a-row class="card-footer" type="flex" justify="center" align="top">
-			<a-col :span="6">
-				<h4>3,6K</h4>
-				<span>Users</span>
-			</a-col>
-			<a-col :span="6">
-				<h4>2m</h4>
-				<span>Clicks</span>
-			</a-col>
-			<!-- <a-col :span="6">
-				<h4>$772</h4>
-				<span>Sales</span>
-			</a-col> -->
-			<a-col :span="6">
-				<h4>82</h4>
-				<span>Items</span>
-			</a-col>
-		</a-row>
+		<chart-bar :height="220" :data="barChartData"></chart-bar>
 	</a-card>
 	<!-- Active Users Card -->
 
@@ -37,6 +35,7 @@
 
 	// Bar chart for "Active Users" card.
 	import ChartBar from '../Charts/ChartBar' ;
+	import { GET_ANALYTICS } from '../../store/action_types'
 
 	export default ({
 		components: {
@@ -57,8 +56,72 @@
 						maxBarThickness: 20,
 					}, ],
 				},
+				startDate: null,
+				endDate: null
 			}
 		},
+		computed: {
+			analytics() {
+				return this.$store.getters.analytics.data
+			}
+		},
+		methods: {
+			getAnalytics() {
+				this.$store.dispatch(GET_ANALYTICS)
+			},
+			filter() {
+
+			}
+		}
 	})
 
 </script>
+<style scoped>
+.date-filter .col {
+        margin: 0px;
+        padding: 0px;
+    }
+    
+.date-filter label {
+	font-size: 14px;
+	color: #6c757d;
+	padding: 0px;
+	margin: 0px;
+	margin-right: 5px;
+}
+
+.datePicker {
+	padding: 1px 5px 1px 5px;
+	border-radius: 5px;
+	box-shadow: none !important;
+	border: 1px solid rgb(68, 68, 68);
+	background-color: #EDF6FC;
+	border-color: #E1EEFB;
+	color: #6c757d;
+}
+
+.datePicker:hover {
+	background-color: #eff2f4;
+}
+
+.datePicker:focus {
+	border: none !important;
+	box-shadow: none !important;
+	border: 2px solid grey;
+}
+
+.datePicker:active {
+	border: none !important;
+	box-shadow: none !important;
+	border: 2px solid grey;
+}
+
+.filter-btn {
+	background-color: #EDF6FC;
+	border-color: #E1EEFB;
+	color: #1890FF;
+	height: 30px;
+	font-size: 15px;
+	padding: 3px 10px 3px 10px;
+}
+</style>

@@ -6,10 +6,12 @@ import {
     LOGIN,
     SIGNUP,
     LOGOUT,
-    CLEAR_ACCOUNT_ISLOADING
+    CLEAR_ACCOUNT_ISLOADING,
+    GET_ACCOUNT
 } from '../action_types'
 import { LOGIN_URL, SIGNUP_URL } from '../../utils/urls'
 import { AUTH_LOGIN_ERROR_MSG, AUTH_SIGNUP_ERROR_MSG } from '../../utils/consts'
+import errorMsgs from '../../utils/error_msgs'
 
 const account = {
     state: {
@@ -30,7 +32,7 @@ const account = {
     },
     actions: {
         [LOGIN]: asyncHandler(async({ commit }, payload) => {
-            commit(SET_ACCOUNT, { data: null, isLoading: true })
+            commit(SET_ACCOUNT, { isLoading: true })
             console.log('payload', payload)
             const result = await axios.post(LOGIN_URL, {
                 email: payload.email,
@@ -44,11 +46,11 @@ const account = {
                     // router.go()
                 return
             }
-            commit(SET_ACCOUNT, { data: null, isLoading: false })
-            commit(SET_ERRORMSG, AUTH_LOGIN_ERROR_MSG)
+            commit(SET_ACCOUNT, { isLoading: false })
+            commit(SET_ERRORMSG, errorMsgs[result.status])
         }),
         [SIGNUP]: asyncHandler(async({ commit }, payload) => {
-            commit(SET_ACCOUNT, { data: null, isLoading: true })
+            commit(SET_ACCOUNT, { isLoading: true })
             console.log('payload SP', payload)
             const result = await axios.post(SIGNUP_URL, {
                 firstName: payload.firstName,
@@ -57,24 +59,38 @@ const account = {
                 phone: payload.phone,
                 password: payload.password
             })
-            console.log('result.data.statusCode == 200')
-            console.log('result.data.statusCode == 200', result.data.status)
+            console.log('result.data.statusCode', result.data.status)
 
             if (result.status == 200) {
                 commit(SET_ACCOUNT, { data: result.data.data, isLoading: false })
                 commit(SET_SESSION_TOKEN, result.data.sessionToken)
-                router.go()
+                router.push({ name: 'Dashboard' })
+                    // router.go()
                 return
             }
-            commit(SET_ACCOUNT, { data: null, isLoading: false })
-            commit(SET_ERRORMSG, AUTH_SIGNUP_ERROR_MSG)
+            console.log('errorMsgs[result.status]', errorMsgs[result.status])
+            commit(SET_ACCOUNT, { isLoading: false })
+            commit(SET_ERRORMSG, errorMsgs[result.status])
         }),
         [LOGOUT]: asyncHandler(async({ commit }) => {
-            commit(SET_ACCOUNT, { data: null, isLoading: false })
+            commit(SET_ACCOUNT, { isLoading: false })
             commit(SET_SESSION_TOKEN, null)
-            commit(SET_ERRORMSG, result.data.msg)
+            commit(SET_ERRORMSG, errorMsgs[result.status])
             router.go()
             return
+        }),
+        [GET_ACCOUNT]: asyncHandler(async({ commit }, payload) => {
+            commit(SET_ACCOUNT, { isLoading: true })
+            const result = await axios.get(GET_ACCOUNT_URL, {
+                params: {
+
+                }
+            })
+
+            if (result.status == 200) {
+                commit(SET_ACCOUNT, { data: result.data.user, isLoading: false })
+                return
+            }
         }),
         [CLEAR_ACCOUNT_ISLOADING]: asyncHandler(async({ commit }) => {
             commit(SET_ACCOUNT, { isLoading: false })

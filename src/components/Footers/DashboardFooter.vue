@@ -7,7 +7,7 @@
 
 				<!-- Footer Copyright Notice -->
 				<p class="copyright">
-					© 2021, Ultimate Feed
+					© {{ year }}, Ultimate Feed
 				</p>
 				<!-- / Footer Copyright Notice -->
 
@@ -16,7 +16,6 @@
 
 				<!-- Footer Navigation Menu -->
 				<a-menu mode="horizontal">
-					<a-menu-item>Creative Tim</a-menu-item>
 					<a-menu-item>About Us</a-menu-item>
 					<a-menu-item>License</a-menu-item>
 				</a-menu>
@@ -36,6 +35,15 @@
 			return {
 			}
 		},
+		methods: {
+			getYear() {
+				const date = new Date(Date.now())
+				this.year = date.getFullYear()
+			}
+		},
+		created() {
+			this.getYear()
+		}
 	})
 
 </script>

@@ -55,7 +55,7 @@ export default {
                 time: new Date(Date.now()),
                 // foreign_id: this.account.id
             }
-            this.$store.dispatch(GET_ENGAGEMENT, engagement)
+            // this.$store.dispatch(GET_ENGAGEMENT, engagement)
         },
         getFeeds() {
             const feedObj = {
